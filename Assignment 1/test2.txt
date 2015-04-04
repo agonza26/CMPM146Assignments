@@ -1,0 +1,13 @@
+XXXXXXXXXXXXXXXXXXXXXX
+X....................X
+X..a..............b..X
+X...............X.....X
+XXXXXXXXXX..XXXXX..XX.X
+X...............X......X
+X...............X.XX....X
+X........XXXXXXXX.........XXXXX
+X.......X...X...X.XXXX......XXX
+X.......X.e.X.d.X..c.XXXXXX..X
+X.......X...X...X....X......XXX
+XXXXXXXXXXXXXXXXXXXXXX.f...X
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
