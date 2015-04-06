@@ -49,11 +49,9 @@ def dijkstras_shortest_path(src, dst, graph, adj, boolean):
 
 
 	while Q :
-		
 		distU, u = heappop(Q)
 		
-		
-
+	
 
 
 		if u == dst:
@@ -61,12 +59,12 @@ def dijkstras_shortest_path(src, dst, graph, adj, boolean):
 
 		
 
-		neightbors = navigation_edges(graph,u)
+		neightbors = adj(graph,u)
 		
 
 		for v in neightbors:
 			
-			alt = dist[u] + sqrt(abs( u[0] - v[0])*abs( u[0] - v[0]) +        abs( u[1] - v[1])*abs( u[1] - v[1]))
+			alt = dist[u] + sqrt(( u[0] - v[0])*( u[0] - v[0]) + ( u[1] - v[1])*( u[1] - v[1]))
 			
 
 
@@ -124,7 +122,8 @@ if __name__ ==  '__main__':
 	import sys
 
 	if(len(sys.argv)<4):
-		print("usage: python p1_djikstras_dungeon.py [filename] [waypoint 1] [waypoint 2] ")
+
+		print(" \nusage: python p1_djikstras_dungeon.py [filename] [waypoint 1] [waypoint 2] \n")
 		sys.exit()
 	elif(len(sys.argv)==4):
 		_, filename, src_waypoint, dst_waypoint = sys.argv
