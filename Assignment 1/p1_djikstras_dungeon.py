@@ -31,7 +31,7 @@ def navigation_edges(level, cell):
 
 
 
-def dijkstras_shortest_path(src, dst, graph, adj):
+def dijkstras_shortest_path(src, dst, graph, adj, boolean):
 	dist = {}
 	prev = {}
 	Q = []
@@ -69,6 +69,7 @@ def dijkstras_shortest_path(src, dst, graph, adj):
 			alt = dist[u] + sqrt(abs( u[0] - v[0])*abs( u[0] - v[0]) +        abs( u[1] - v[1])*abs( u[1] - v[1]))
 			
 
+
 			
 			if(v in dist):
 				if( alt < dist[v] ):
@@ -83,6 +84,8 @@ def dijkstras_shortest_path(src, dst, graph, adj):
 
 	S = []
 	x = dst
+	if(boolean):
+		print dist[dst]
 
 	while x in prev:
 		heappush(S, x)
@@ -103,12 +106,12 @@ def dijkstras_shortest_path(src, dst, graph, adj):
 
 
 
-def test_route(filename, src_waypoint, dst_waypoint):
+def test_route(filename, src_waypoint, dst_waypoint,boolean):
 	level = load_level(filename)
 	show_level(level)
 	src = level['waypoints'][src_waypoint]
 	dst = level['waypoints'][dst_waypoint]
-	path = dijkstras_shortest_path(src, dst, level, navigation_edges)
+	path = dijkstras_shortest_path(src, dst, level, navigation_edges,boolean)
 	if path:
 		show_level(level, path)
 	else:
@@ -119,5 +122,22 @@ def test_route(filename, src_waypoint, dst_waypoint):
 #main method
 if __name__ ==  '__main__':
 	import sys
-	_, filename, src_waypoint, dst_waypoint = sys.argv
-	test_route(filename, src_waypoint, dst_waypoint)
+
+	if(len(sys.argv)<4):
+		print("usage: python p1_djikstras_dungeon.py [filename] [waypoint 1] [waypoint 2] ")
+		sys.exit()
+	elif(len(sys.argv)==4):
+		_, filename, src_waypoint, dst_waypoint = sys.argv
+	else:
+
+		 filename = sys.argv[1]
+		 src_waypoint = sys.argv[2]
+		 dst_waypoint = sys.argv[3]
+
+	if len(sys.argv) >= 5:
+		if sys.argv[4] == "true":
+			flag = True
+	else:
+		flag = False
+
+	test_route(filename, src_waypoint, dst_waypoint, flag)
