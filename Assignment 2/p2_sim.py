@@ -1,11 +1,11 @@
 from p2_game import Game, State
 from collections import defaultdict
 
-import mctfull_bot5 as red_bot 
-import rollout_bot as blue_bot
+import fast_bot as red_bot 
+import greedy_bot as blue_bot
 BOTS = {'red': red_bot, 'blue': blue_bot}
 
-rounds = 100
+rounds = 25
 wins = defaultdict(lambda: 0)
 
 for i in range(rounds):
