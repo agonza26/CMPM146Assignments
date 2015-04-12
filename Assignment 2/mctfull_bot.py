@@ -50,6 +50,8 @@ def think(state, quip):
         while new_state.get_moves() != []: # while state is non-terminal
             new_state.apply_move(random.choice(new_state.get_moves()))
 
+
+
         # Backpropagate
         while node != None: # backpropagate from the expanded node and work back to the root node
 
@@ -116,4 +118,4 @@ class Node(object):
 
 	def Update(self, result):
 		self.visits += 1
-		self.score = result
+		self.score += result

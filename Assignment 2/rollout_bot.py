@@ -43,5 +43,5 @@ def think(state, quip):
 			best_expecation = expectation
 			best_move = move
 
-	print "Picking %s with expected score %f" % (str(best_move), best_expecation)
+	#print "Picking %s with expected score %f" % (str(best_move), best_expecation)
 	return best_move
