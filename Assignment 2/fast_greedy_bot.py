@@ -1,8 +1,8 @@
 import time
 import math
 import random
-THINK_DURATION = 3
-
+THINK_DURATION = 1
+##this bot sucks against fast bot
 
 def think(state, quip):
 
@@ -34,9 +34,23 @@ def think(state, quip):
         # Rollout - this can often be made orders of magnitude quicker using a state.GetRandomMove() function
         dec = 5
         while new_state.get_moves() != [] and dec >0: # while state is non-terminal
-            new_state.apply_move(random.choice(new_state.get_moves()))
+            bestMove = None
+
+        #uses greedy to choose random move
+            for i in state.get_moves():
+                stateCopy = state.copy()
+                stateCopy.apply_move(i)
+
+                if state.get_score()[state.get_whos_turn()] < stateCopy.get_score()[state.get_whos_turn()]:
+                    bestMove = i 
+                    break
+            if bestMove == None:
+                bestMove=state.get_moves()[  random.randint(0,len( state.get_moves())-1)  ]
+
+            new_state.apply_move(bestMove)
             dec -= 1
            
+
 
         # Backpropagate
         def computeScore(player, parent):
@@ -70,7 +84,8 @@ def think(state, quip):
 
     sample_rate = float(iterations)/(t_now - t_start)
 
-    print "fast bot as %s with a sample rate of %d"  %(state.get_whos_turn(), sample_rate)
+
+    print "fast greedy bot as %s with a sample rate of %d"  %(state.get_whos_turn(), sample_rate)
     return sorted(rootnode.children, key = lambda c: c.score)[-1].move
   
     
@@ -87,7 +102,7 @@ class Node(object):
 
 	def SelectChild(self):
 
-		s = sorted(self.children, key = lambda c: float(float(c.score)/c.visits) + math.sqrt(2*math.log(self.visits)/c.visits))[-1]
+		s = sorted(self.children, key = lambda c: float(float(c.score)/c.visits) + 2*math.sqrt(2*math.log(self.visits)/c.visits))[-1]
 		return s
 
 	def AddChild(self, s, m):

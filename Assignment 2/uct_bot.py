@@ -13,15 +13,11 @@ def think(state, quip):
     rootnode = Node(state)
 
 
-
-
     while True:
 
         node = rootnode
         new_state = state.copy()
         iterations += 1
-
-
 
         # Select
         while node.untried_moves == [] and node.children != []: # node is fully expanded and non-terminal
@@ -56,7 +52,6 @@ def think(state, quip):
             return score
 
         
-       
 
 
         while node != None: # backpropagate from the expanded node and work back to the root node
@@ -77,12 +72,8 @@ def think(state, quip):
 
     sample_rate = float(iterations)/(t_now - t_start)
    
-    print sample_rate
+    print "uct bot as %s with a sample rate of %d"  %(state.get_whos_turn(), sample_rate)
     return sorted(rootnode.children, key = lambda c: c.score)[-1].move
-  
-    
-
-
 
 
 
@@ -98,7 +89,6 @@ class Node(object):
 		self.score = 0.0
 
 	def SelectChild(self):
-
 		s = sorted(self.children, key = lambda c: float(float(c.score)/c.visits) + 2*math.sqrt(2*math.log(self.visits)/c.visits))[-1]
 		return s
 
