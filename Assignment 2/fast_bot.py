@@ -1,7 +1,7 @@
 import time
 import math
 import random
-THINK_DURATION = 3
+THINK_DURATION = 1
 
 
 def think(state, quip):

@@ -9,7 +9,6 @@ BOTS = {'red': red_bot, 'blue': blue_bot}
 def display(state):
 
 	canvas.delete(ALL)
-
 	square_width = min(int(canvas['width']),int(canvas['height']))
 
 	step = square_width/state.game.width
