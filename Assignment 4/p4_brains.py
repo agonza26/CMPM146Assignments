@@ -47,6 +47,8 @@ class MantisBrain:
 
         if random.random() <0.2:
           print("RRRRRRAAAAAAAAHHHHHHH")
+
+          self.body.color = self.body.rage_color
           self.body.stop()
           self.find_Obstacle();
 
@@ -65,8 +67,9 @@ class MantisBrain:
 
     elif self.state == 'rage':
 
-      if random.random() <0.1:
+      if random.random() <0.05:
         print("I calmed down")
+        self.body.color = self.body.default_color
         self.body.stop()
         self.state = "idle"
         self.target = None
@@ -78,8 +81,8 @@ class MantisBrain:
 
       elif message == 'collide' and details['what'] == 'Obstacle':
       # a slug bumped into us; get curious
-        self.body.radius += 0.1
-        self.target.radius += 0.2
+        self.body.radius += 0.3
+        self.target.radius += 0.5
 
 
 
