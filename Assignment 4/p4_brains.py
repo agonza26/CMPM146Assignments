@@ -15,14 +15,14 @@ class MantisBrain:
 
 
   def find_Obstacle(self):
-          try:
-            self.target=self.body.find_nearest("Obstacle")
-            self.body.follow(self.target)
-            self.body.set_alarm(0.25)
-            self.state = 'rage'
-          except:
-            print("no targets sorry, Mantis, find_Obstacle")
-            self.state = "idle"
+    try:
+      self.target=self.body.find_nearest("Obstacle")
+      self.body.follow(self.target)
+      self.body.set_alarm(0.25)
+      self.state = 'rage'
+    except:
+      print("no targets sorry, Mantis, find_Obstacle")
+      self.state = "idle"
 
 
 
@@ -45,7 +45,7 @@ class MantisBrain:
 
 
 
-        if random.random() <0.2:
+        if random.random() >1:
           print("RRRRRRAAAAAAAAHHHHHHH")
 
           self.body.color = self.body.rage_color
@@ -57,7 +57,7 @@ class MantisBrain:
       elif message == 'collide' and details['what'] == 'Slug':
         # a slug bumped into us; get curious
         self.state = 'curious'
-        self.body.set_alarm(1) # think about this for a sec
+        self.body.set_alarm(0.2) # think about this for a sec
         self.body.stop()
         self.target = details['who']
 
@@ -81,8 +81,10 @@ class MantisBrain:
 
       elif message == 'collide' and details['what'] == 'Obstacle':
       # a slug bumped into us; get curious
-        self.body.radius += 0.3
-        self.target.radius += 0.5
+
+        
+        self.body.radius += 0.3 
+        self.target.radius += 2
 
 
 
@@ -97,12 +99,12 @@ class MantisBrain:
       if message == 'timer':
         # chase down that slug who bumped into us
         if self.target:
-          if random.random() < 0.5:
+          if random.random() < 0.2:
             self.body.stop()
             self.state = 'idle'
           else:
             self.body.follow(self.target)
-          self.body.set_alarm(1)
+          self.body.set_alarm(0.2)
 
 
       elif message == 'collide' and details['what'] == 'Slug':
@@ -279,14 +281,6 @@ class SlugBrain:
 
 
 
-
-
-
-
-
-
-
-
     #-------------------------------------------------
     elif self.state is 'attack':
 
@@ -295,7 +289,7 @@ class SlugBrain:
 
       elif message == 'collide' and details['what'] == 'Mantis':
         self.body.stop()
-        details['who'].amount-=5
+        details['who'].amount-=.05
 
 
 
@@ -407,10 +401,10 @@ commands = {
    
 
 world_specification = {
-  #'worldgen_seed': 13, # comment-out to randomize
+  'worldgen_seed': 13, # comment-out to randomize
   'nests': 2,
   'obstacles': 25,
-  'resources': 0,
+  'resources': 4,
   'slugs': 5,
   'mantises': 15,
 }
