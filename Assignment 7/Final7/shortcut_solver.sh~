@@ -1,0 +1,6 @@
+./clingo-4.5.0-macos-10.9/gringo $@ \
+    | ./clingo-4.5.0-macos-10.9/reify \
+    | ./clingo-4.5.0-macos-10.9/clingo --parallel-mode=4 --outf=2 \
+            - \
+            metaS.lp \
+            ./clingo-4.5.0-macos-10.9/examples/reify/meta*.lp 2>/dev/null
